@@ -75,6 +75,7 @@ body{
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
+.ico{width:18px;height:18px;flex-shrink:0}.ico-lg{width:21px;height:21px}
 .num,.tabular{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -99,7 +100,9 @@ p{color:var(--ink-soft)}
   padding:15px 26px;border-radius:var(--r);border:1px solid transparent;
   cursor:pointer;transition:transform .14s cubic-bezier(.23,1,.32,1),box-shadow .14s ease;
 }
+.btn:hover{transform:translateY(-1px)}
 .btn:active{transform:translateY(2px)}
+a[href],button{cursor:pointer}
 .btn-primary{background:var(--indigo);color:#fff;box-shadow:0 2px 0 var(--indigo-deep),var(--shadow)}
 .btn-primary:active{box-shadow:0 0 0 var(--indigo-deep)}
 .btn-quiet{background:var(--sheet);color:var(--ink);border-color:var(--rule);box-shadow:var(--shadow)}
@@ -119,7 +122,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:70px}
 @media(max-width:860px){.navlinks a:not(.btn){display:none}}
 
 /* ---- hero --------------------------------------------------- */
-.hero{padding:74px 0 84px}
+.hero{padding:52px 0 58px}
 .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center}
 @media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:40px}}
 .hero h1{margin:16px 0 20px}
@@ -180,11 +183,58 @@ nav{display:flex;align-items:center;justify-content:space-between;height:70px}
 }
 
 /* ---- section rhythm ----------------------------------------- */
-section{padding:86px 0}
-.section-head{max-width:660px;margin-bottom:44px}
+section{padding:58px 0}
+section:nth-of-type(even){background:linear-gradient(180deg,rgba(43,68,217,.035),rgba(43,68,217,.015))}
+.loss:nth-child(1){border-top-color:#D2402A}
+.loss:nth-child(2){border-top-color:#C97A08}
+.loss:nth-child(3){border-top-color:#7C3AED}
+.card:nth-child(1){border-top:3px solid var(--indigo)}
+.card:nth-child(2){border-top:3px solid var(--verified)}
+.card:nth-child(3){border-top:3px solid var(--warn)}
+.card:nth-child(4){border-top:3px solid #7C3AED}
+.section-head{max-width:660px;margin-bottom:30px}
 .section-head h2{margin:12px 0 14px}
 
+
+/* ---- the owner's dashboard ---------------------------------
+   What all the figures above add up to when someone opens the app in the
+   morning. Drawn in SVG rather than imported — a chart package for two
+   shapes is weight this page would carry forever. */
+.dash{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r-lg);box-shadow:var(--shadow-lift);overflow:hidden;margin-top:34px}
+.dash-bar{padding:14px 20px;border-bottom:1px solid var(--rule);background:linear-gradient(180deg,#FCFCFA,#fff);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.dash-tabs{display:flex;gap:4px}
+.dash-tabs button{border:1px solid transparent;background:transparent;color:var(--ink-faint);font:700 12.5px var(--body);padding:7px 13px;border-radius:99px;transition:all .16s ease}
+.dash-tabs button[aria-selected=true]{background:var(--indigo-wash);color:var(--indigo);border-color:rgba(43,68,217,.18)}
+.dash-tabs button:hover{color:var(--ink)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule)}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--sheet);padding:20px}
+.kpi-v{font-family:var(--display);font-size:clamp(21px,3vw,30px);font-weight:800;letter-spacing:-.03em;line-height:1;margin:7px 0 5px;font-variant-numeric:tabular-nums}
+.kpi-d{font-size:11.5px;font-weight:700}
+.up{color:var(--verified)}.down{color:var(--bad)}
+.dash-body{padding:22px 20px;display:grid;grid-template-columns:1.35fr 1fr;gap:26px}
+@media(max-width:860px){.dash-body{grid-template-columns:1fr}}
+.spark{width:100%;height:150px;display:block}
+.spark .line{fill:none;stroke:var(--indigo);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;transition:stroke-dashoffset 1.5s cubic-bezier(.23,1,.32,1)}
+.dash.seen .spark .line{stroke-dashoffset:0}
+.spark .fill{fill:url(#sparkfill);opacity:0;transition:opacity .8s ease .5s}
+.dash.seen .spark .fill{opacity:1}
+.spark .gridline{stroke:var(--rule);stroke-width:1}
+.donut .seg{fill:none;stroke-width:13;transition:stroke-dasharray 1.1s cubic-bezier(.23,1,.32,1)}
+.legend{display:flex;flex-direction:column;gap:9px;margin-top:14px;font-size:13px}
+.legend div{display:flex;align-items:center;gap:9px}
+.legend b{width:9px;height:9px;border-radius:3px;flex-shrink:0}
+.legend span:last-child{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
+
 /* ---- reveal ------------------------------------------------- */
+
+.langtog{display:inline-flex;background:var(--sheet);border:1px solid var(--rule);border-radius:99px;padding:3px;gap:2px}
+.langtog button{border:0;background:transparent;font:800 12px var(--body);color:var(--ink-faint);padding:6px 13px;border-radius:99px;transition:all .16s ease}
+.langtog button[aria-pressed=true]{background:var(--indigo);color:#fff}
+.store{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;border-radius:var(--r);padding:11px 20px;transition:transform .14s cubic-bezier(.23,1,.32,1)}
+.store:hover{transform:translateY(-1px)}
+.store small{display:block;font-size:10px;letter-spacing:.09em;opacity:.72;font-weight:700}
+.store b{display:block;font-size:15px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
 .rise{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .6s cubic-bezier(.23,1,.32,1)}
 .rise.seen{opacity:1;transform:none}
 
@@ -196,6 +246,8 @@ section{padding:86px 0}
   padding:26px 24px;box-shadow:var(--shadow);border-top:3px solid var(--bad);
 }
 .loss h3{margin-bottom:9px}
+.loss{transition:transform .22s cubic-bezier(.23,1,.32,1),box-shadow .22s ease}
+.loss:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
 .loss p{font-size:14.5px}
 
 /* ---- what you find out (the insight cards) ------------------ */
@@ -205,18 +257,20 @@ section{padding:86px 0}
   background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r-lg);
   padding:26px;box-shadow:var(--shadow);
 }
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
 .card h3{margin:10px 0 8px}
 .card p{font-size:14.5px}
 
 /* bar chart — drawn, not imported. A chart library for six bars is weight
    the page would carry forever. */
 .chart{display:flex;align-items:flex-end;gap:8px;height:112px;margin-top:20px}
-.bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end}
+.bar .col{width:100%;height:84px;display:flex;align-items:flex-end}
 .bar span{
   width:100%;background:var(--indigo);border-radius:5px 5px 0 0;
   height:0;transition:height .9s cubic-bezier(.23,1,.32,1);
 }
-.bar.quiet span{background:#C3CAE0}
+.bar.quiet .col span{background:#C3CAE0}
 .bar small{font-size:10.5px;color:var(--ink-faint);font-weight:700}
 
 /* staff table */
@@ -282,6 +336,8 @@ thead th{
 thead th.us{background:var(--indigo-wash);color:var(--indigo)}
 tbody td:first-child{font-weight:600;color:var(--ink)}
 td.us{background:rgba(237,240,254,.5);font-weight:700}
+tbody tr{transition:background .16s ease}
+tbody tr:hover{background:#FBFBF8}
 tbody tr:last-child td{border-bottom:0}
 .yes{color:var(--verified);font-weight:800}
 .no{color:var(--ink-faint)}
@@ -320,6 +376,13 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-cam" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l1.2-1.8A1 1 0 0 1 9 4h6a1 1 0 0 1 .8.4L17 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="i-vid" viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15 10.5 21 7v10l-6-3.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4.5 21 20H3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4.2M12 17.2v.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
 
 <header id="hdr">
   <div class="wrap">
@@ -338,11 +401,15 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
   <path d="M40 10h16v16z" fill="url(#arw)"/>
 </svg> OnTrack</a>
       <div class="navlinks">
-        <a href="#know">What you find out</a>
-        <a href="#proof">Godown proof</a>
-        <a href="#compare">Compare</a>
-        <a href="#pricing">Pricing</a>
-        <a class="btn btn-primary" href="#pricing" style="padding:11px 20px;font-size:14.5px">Start free</a>
+        <a href="#know" data-hi="क्या पता चलेगा">What you find out</a>
+        <a href="#proof" data-hi="गोदाम का सबूत">Godown proof</a>
+        <a href="#compare" data-hi="तुलना">Compare</a>
+        <a href="#pricing" data-hi="कीमत">Pricing</a>
+        <div class="langtog" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="hi" aria-pressed="false">हिं</button>
+        </div>
+        <a class="btn btn-primary" href="#pricing" style="padding:11px 20px;font-size:14.5px" data-hi="मुफ़्त शुरू करें">Start free</a>
       </div>
     </nav>
   </div>
@@ -354,28 +421,31 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
 <div class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">Billing · stock · godown — for Indian wholesale</div>
-      <h1>Every entry in your godown has a face, a time and <span class="ink-underline">a photograph</span>.</h1>
+      <div class="eyebrow" data-hi="बिलिंग · स्टॉक · गोदाम — भारतीय होलसेल के लिए">Billing · stock · godown — for Indian wholesale</div>
+      <h1>Know exactly what is in your godown — and <span class="ink-underline">who put it there</span>.</h1>
       <p class="lede">
         Your staff record what came in and what went out on their own phone — with a photo,
         a spoken note and their name on it. You approve it from the shop. Arguments about
         what was sent end at the record.
       </p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#pricing">Start free for 14 days</a>
-        <a class="btn btn-quiet" href="#proof">See how the proof works</a>
+        <a class="btn btn-primary" href="#pricing" data-hi="14 दिन मुफ़्त शुरू करें">Start free for 14 days</a>
+        <a class="store" href="#" aria-label="Get it on Google Play">
+          <svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M1 1.6v18.8c0 .6.6 1 1.1.7l14.5-9.4c.5-.3.5-1 0-1.3L2.1.9C1.6.6 1 1 1 1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M1.4 1.1 12 11 1.4 20.9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span><small data-hi="अभी उपलब्ध">GET IT ON</small><b data-hi="गूगल प्ले">Google Play</b></span>
+        </a>
       </div>
-      <div class="hero-note">Make 10 bills before you register anything. No card.</div>
+      <div class="hero-note" data-hi="रजिस्टर किए बिना 10 बिल बनाइए। कार्ड की ज़रूरत नहीं।">Make 10 bills before you register anything. No card.</div>
     </div>
 
     <div class="ledger" id="ledger" aria-label="Godown entries arriving">
       <div class="ledger-head">
-        <div class="ledger-title">Godown — today</div>
+        <div class="ledger-title" data-hi="गोदाम — आज">Godown — today</div>
         <div class="live"><i></i> LIVE</div>
       </div>
       <div id="entries"></div>
       <div class="ledger-foot">
-        <span style="color:var(--verified);font-weight:800">✓</span>
+        <svg class="ico" style="color:var(--verified);width:16px;height:16px"><use href="#i-check"/></svg>
         Every line above carries a photo and the name of who made it
       </div>
     </div>
@@ -386,25 +456,25 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
 <section>
   <div class="wrap">
     <div class="section-head rise">
-      <div class="eyebrow">Why firms switch</div>
-      <h2>Three things a ledger cannot tell you</h2>
+      <div class="eyebrow" data-hi="लोग क्यों बदलते हैं">Why firms switch</div>
+      <h2 data-hi="तीन चीज़ें जो हर साल पैसा खाती हैं">Three things that cost you money every year</h2>
       <p class="lede">None of these are software problems. They are money, and they are what a
         wholesale firm actually loses in a year.</p>
     </div>
     <div class="losses">
       <div class="loss rise">
-        <h3>Stock that is wrong by three days</h3>
+        <h3 data-hi="तीन दिन पुराना गलत स्टॉक">Stock that is wrong by three days</h3>
         <p>A godown entry sits unapproved and the stock figure is a guess. You sell what is not
           there, or hold what nobody can see. OnTrack shows how long an entry has been waiting,
           and turns it red after a day.</p>
       </div>
       <div class="loss rise">
-        <h3>Money that quietly ages</h3>
+        <h3 data-hi="चुपचाप पुराना होता पैसा">Money that quietly ages</h3>
         <p>A dealer owes two lakh. Fifteen days old or a hundred and twenty? On a ledger both
           look the same. OnTrack ages every rupee so you chase the ones that are hardening.</p>
       </div>
       <div class="loss rise">
-        <h3>"I never received that"</h3>
+        <h3 data-hi=""माल आया ही नहीं"">"I never received that"</h3>
         <p>Goods left the godown, the dealer says they did not arrive, and there is nothing to
           show. Every OnTrack dispatch carries a photo, the transporter's name and who loaded it.</p>
       </div>
@@ -416,49 +486,49 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
 <section id="know">
   <div class="wrap">
     <div class="section-head rise">
-      <div class="eyebrow">The same day, not at year end</div>
-      <h2>What you find out by Tuesday afternoon</h2>
+      <div class="eyebrow" data-hi="उसी दिन, साल के अंत में नहीं">The same day, not at year end</div>
+      <h2 data-hi="ये सब आज शाम तक पता होगा">You will know these by this evening</h2>
       <p class="lede">Not reports you have to ask for. The things a wholesaler checks anyway,
         worked out from your own bills as they are made.</p>
     </div>
 
     <div class="insights">
       <div class="card rise">
-        <div class="eyebrow">Item performance</div>
-        <h3>Which cloth moves, and which is sitting</h3>
+        <div class="eyebrow" data-hi="आइटम की चाल">Item performance</div>
+        <h3 data-hi="कौन सा माल बिकता है, कौन सा पड़ा है">Which items sell, which are stuck</h3>
         <p>Twelve months of every item, by value. The ones that quietly stopped selling show up
           before the next order goes out.</p>
         <div class="chart" data-chart>
-          <div class="bar"><span data-h="34"></span><small>Aug</small></div>
-          <div class="bar"><span data-h="52"></span><small>Sep</small></div>
-          <div class="bar"><span data-h="78"></span><small>Oct</small></div>
-          <div class="bar"><span data-h="96"></span><small>Nov</small></div>
-          <div class="bar"><span data-h="71"></span><small>Dec</small></div>
-          <div class="bar quiet"><span data-h="22"></span><small>Jan</small></div>
+          <div class="bar"><div class="col"><span data-h="34"></span></div><small>Aug</small></div>
+          <div class="bar"><div class="col"><span data-h="52"></span></div><small>Sep</small></div>
+          <div class="bar"><div class="col"><span data-h="78"></span></div><small>Oct</small></div>
+          <div class="bar"><div class="col"><span data-h="96"></span></div><small>Nov</small></div>
+          <div class="bar"><div class="col"><span data-h="71"></span></div><small>Dec</small></div>
+          <div class="bar quiet"><div class="col"><span data-h="22"></span></div><small>Jan</small></div>
         </div>
       </div>
 
       <div class="card rise">
-        <div class="eyebrow">Staff performance</div>
-        <h3>Who is actually bringing in the orders</h3>
+        <div class="eyebrow" data-hi="स्टाफ की परफॉरमेंस">Staff performance</div>
+        <h3 data-hi="कौन सेल्समैन असल में चला रहा है">Which salesman is really performing</h3>
         <p>Sales by salesman, orders closed, follow-ups made. Measured from the bills, not
           remembered at the end of the month.</p>
         <div class="rank" data-rank>
           <div class="rank-row"><div class="rank-n num">1</div>
-            <div>Amar<div class="rank-track"><div class="rank-bar" data-w="100"></div></div></div>
+            <div>Ramesh<div class="rank-track"><div class="rank-bar" data-w="100"></div></div></div>
             <div class="num" style="font-weight:800">₹8.4L</div></div>
           <div class="rank-row"><div class="rank-n num">2</div>
-            <div>Vikas<div class="rank-track"><div class="rank-bar" data-w="72"></div></div></div>
+            <div>Suresh<div class="rank-track"><div class="rank-bar" data-w="72"></div></div></div>
             <div class="num" style="font-weight:800">₹6.1L</div></div>
           <div class="rank-row"><div class="rank-n num">3</div>
-            <div>Harender<div class="rank-track"><div class="rank-bar" data-w="41"></div></div></div>
+            <div>Deepak<div class="rank-track"><div class="rank-bar" data-w="41"></div></div></div>
             <div class="num" style="font-weight:800">₹3.5L</div></div>
         </div>
       </div>
 
       <div class="card rise">
-        <div class="eyebrow">Receivables</div>
-        <h3>Whose money is hardening</h3>
+        <div class="eyebrow" data-hi="बकाया">Receivables</div>
+        <h3 data-hi="किसका कितना बकाया है, और कितना पुराना">Who owes you, and for how long</h3>
         <p>Every rupee outstanding, sorted by how old it is. The ninety-day bucket is the one
           that turns into a loss.</p>
         <div class="aging" data-aging>
@@ -476,18 +546,18 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
       </div>
 
       <div class="card rise">
-        <div class="eyebrow">Every dealer</div>
-        <h3>What this one buys, and what they owe</h3>
+        <div class="eyebrow" data-hi="हर डीलर">Every dealer</div>
+        <h3 data-hi="एक डीलर की पूरी जानकारी, एक स्क्रीन पर">Everything about one dealer, on one screen</h3>
         <p>Open a dealer and see their whole relationship on one screen — what they keep buying,
           a year of their buying, and every credit document with a running balance.</p>
         <div style="margin-top:20px;border:1px solid var(--rule);border-radius:12px;overflow:hidden">
           <div style="padding:13px 15px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center">
-            <div><div style="font-weight:700;font-size:14.5px">Blackout Curtain 108×108</div>
+            <div><div style="font-weight:700;font-size:14.5px">Cotton Bedsheet — Double</div>
               <div style="font-size:11.5px;color:var(--ink-faint)">340 pcs · 11 times</div></div>
             <div class="num" style="font-weight:800">₹2,14,000</div>
           </div>
           <div style="padding:13px 15px;display:flex;justify-content:space-between;align-items:center">
-            <div><div style="font-weight:700;font-size:14.5px">ST DBL Feelgood</div>
+            <div><div style="font-weight:700;font-size:14.5px">Curtain Panel 7ft</div>
               <div style="font-size:11.5px;color:var(--ink-faint)">180 pcs · 7 times</div></div>
             <div class="num" style="font-weight:800">₹96,500</div>
           </div>
@@ -495,29 +565,80 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
       </div>
     </div>
   </div>
-</section>
+
+    <div class="dash rise" data-dash>
+      <div class="dash-bar">
+        <div>
+          <div class="eyebrow" data-hi="मालिक की नज़र">Owner's view</div>
+          <div style="font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.02em;margin-top:2px" data-hi="आज एक नज़र में">Today, at a glance</div>
+        </div>
+        <div class="dash-tabs" role="tablist">
+          <button role="tab" aria-selected="true">Today</button>
+          <button role="tab" aria-selected="false">This month</button>
+          <button role="tab" aria-selected="false">Year</button>
+        </div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="eyebrow" data-hi="आज की बिलिंग">Billed today</div><div class="kpi-v">₹3,84,200</div><div class="kpi-d up">▲ 12% vs last Tuesday</div></div>
+        <div class="kpi"><div class="eyebrow" data-hi="कुल बकाया">Outstanding</div><div class="kpi-v">₹22,60,000</div><div class="kpi-d down">▲ ₹1.4L past 90 days</div></div>
+        <div class="kpi"><div class="eyebrow" data-hi="आपके इंतज़ार में">Waiting for you</div><div class="kpi-v">7</div><div class="kpi-d down">2 waiting over a day</div></div>
+        <div class="kpi"><div class="eyebrow" data-hi="इस हफ्ते के ऑर्डर">Orders due this week</div><div class="kpi-v">14</div><div class="kpi-d up">3 ready to dispatch</div></div>
+      </div>
+      <div class="dash-body">
+        <div>
+          <div class="eyebrow" style="margin-bottom:12px" data-hi="बिलिंग — पिछले 30 दिन">Billing — last 30 days</div>
+          <svg class="spark" viewBox="0 0 420 150" preserveAspectRatio="none" role="img" aria-label="Billing over the last thirty days, rising">
+            <defs><linearGradient id="sparkfill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2B44D9" stop-opacity=".16"/><stop offset="1" stop-color="#2B44D9" stop-opacity="0"/>
+            </linearGradient></defs>
+            <line class="gridline" x1="0" y1="38" x2="420" y2="38"/>
+            <line class="gridline" x1="0" y1="76" x2="420" y2="76"/>
+            <line class="gridline" x1="0" y1="114" x2="420" y2="114"/>
+            <path class="fill" d="M0,112 L34,96 L68,104 L102,72 L136,80 L170,52 L204,64 L238,36 L272,48 L306,26 L340,40 L374,20 L420,30 L420,150 L0,150 Z"/>
+            <path class="line" d="M0,112 L34,96 L68,104 L102,72 L136,80 L170,52 L204,64 L238,36 L272,48 L306,26 L340,40 L374,20 L420,30"/>
+          </svg>
+        </div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:12px" data-hi="पैसा कहाँ फँसा है">Where the money is stuck</div>
+          <svg class="donut" viewBox="0 0 120 120" style="width:150px;height:150px;margin:0 auto;display:block;transform:rotate(-90deg)" role="img" aria-label="Receivables by age">
+            <circle cx="60" cy="60" r="46" fill="none" stroke="#EDEFF4" stroke-width="13"/>
+            <circle class="seg" cx="60" cy="60" r="46" stroke="#128A5E" data-seg="133 289" stroke-dasharray="0 289"/>
+            <circle class="seg" cx="60" cy="60" r="46" stroke="#7CB342" data-seg="69 289" stroke-dasharray="0 289" stroke-dashoffset="-133"/>
+            <circle class="seg" cx="60" cy="60" r="46" stroke="#C97A08" data-seg="52 289" stroke-dasharray="0 289" stroke-dashoffset="-202"/>
+            <circle class="seg" cx="60" cy="60" r="46" stroke="#D2402A" data-seg="35 289" stroke-dasharray="0 289" stroke-dashoffset="-254"/>
+          </svg>
+          <div class="legend">
+            <div><b style="background:#128A5E"></b><span>0–30 days</span><span>₹10.4L</span></div>
+            <div><b style="background:#7CB342"></b><span>30–60</span><span>₹5.4L</span></div>
+            <div><b style="background:#C97A08"></b><span>60–90</span><span>₹4.1L</span></div>
+            <div><b style="background:#D2402A"></b><span>90+</span><span>₹2.7L</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <!-- ============ THE PROOF (dark band) ============ -->
 <section class="night" id="proof">
   <div class="wrap proof-grid">
     <div class="rise">
-      <div class="eyebrow" style="color:#7C879E">The part nobody else has</div>
-      <h2>A godown you can see from the shop</h2>
+      <div class="eyebrow" style="color:#7C879E" data-hi="जो किसी और के पास नहीं">The part nobody else has</div>
+      <h2 data-hi="दुकान से दिखने वाला गोदाम">A godown you can see from the shop</h2>
       <p class="lede" style="margin-top:14px">
         Your godown staff get their own app. Big buttons, Hindi where it matters, and it keeps
         working when the signal drops. Nothing they record can be quietly changed later.
       </p>
       <div class="proof-list">
-        <div class="proof-item"><div class="check">✓</div>
+        <div class="proof-item"><div class="check"><svg class="ico" style="width:13px;height:13px"><use href="#i-check"/></svg></div>
           <div><b>A photograph on every entry</b>
           <p>Taken on the spot, with the rear camera, compressed so it sends even on a weak line.</p></div></div>
-        <div class="proof-item"><div class="check">✓</div>
+        <div class="proof-item"><div class="check"><svg class="ico" style="width:13px;height:13px"><use href="#i-check"/></svg></div>
           <div><b>A voice note when typing is too slow</b>
           <p>Staff say what arrived. Your accountant hears it and finishes the entry properly.</p></div></div>
-        <div class="proof-item"><div class="check">✓</div>
+        <div class="proof-item"><div class="check"><svg class="ico" style="width:13px;height:13px"><use href="#i-check"/></svg></div>
           <div><b>Nothing moves stock until you say so</b>
           <p>Every entry waits for approval, and the app tells you how long it has been waiting.</p></div></div>
-        <div class="proof-item"><div class="check">✓</div>
+        <div class="proof-item"><div class="check"><svg class="ico" style="width:13px;height:13px"><use href="#i-check"/></svg></div>
           <div><b>Who loaded it, and who carried it</b>
           <p>Employee and transporter recorded separately, so a dispatch has two names on it.</p></div></div>
       </div>
@@ -526,20 +647,20 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
     <div class="phone rise">
       <div style="font-size:11.5px;font-weight:800;letter-spacing:.1em;color:#7C879E;margin-bottom:12px">FROM THE GODOWN — WAITING FOR YOU</div>
       <div class="phone-row">
-        <div class="phone-thumb">📷</div>
-        <div><div class="phone-name">Blackout Curtain 108×108</div>
-          <div class="phone-meta">#148 · Amar · 2 hours ago</div></div>
+        <div class="phone-thumb"><svg class="ico" style="color:#9FB3E0"><use href="#i-cam"/></svg></div>
+        <div><div class="phone-name">Cotton Bedsheet — Double</div>
+          <div class="phone-meta">#148 · Ramesh · 2 hours ago</div></div>
         <div class="num" style="color:#8BB4FF;font-weight:800">+14</div>
       </div>
       <div class="phone-row">
-        <div class="phone-thumb">🎤</div>
-        <div><div class="phone-name">ST DBL Feelgood</div>
-          <div class="phone-meta">#147 · Vikas · 3 hours ago</div></div>
+        <div class="phone-thumb"><svg class="ico" style="color:#9FB3E0"><use href="#i-mic"/></svg></div>
+        <div><div class="phone-name">Curtain Panel 7ft</div>
+          <div class="phone-meta">#147 · Suresh · 3 hours ago</div></div>
         <div class="num" style="color:#8BB4FF;font-weight:800">+40</div>
       </div>
       <div class="phone-row" style="border:1px solid rgba(210,64,42,.4)">
-        <div class="phone-thumb">⚠️</div>
-        <div><div class="phone-name">Razai Single</div>
+        <div class="phone-thumb" style="background:rgba(210,64,42,.18)"><svg class="ico" style="color:#F0A08C"><use href="#i-warn"/></svg></div>
+        <div><div class="phone-name">Comforter — Single</div>
           <div class="phone-meta" style="color:#F0A08C">No photo · 2 days waiting</div></div>
         <div class="num" style="color:#7DDCAE;font-weight:800">−25</div>
       </div>
@@ -551,24 +672,24 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
 <section>
   <div class="wrap">
     <div class="section-head rise">
-      <div class="eyebrow">The hardest part of any ERP</div>
-      <h2>Built for the staff you actually have</h2>
+      <div class="eyebrow" data-hi="किसी भी ERP की सबसे मुश्किल बात">The hardest part of any ERP</div>
+      <h2 data-hi="आपका स्टाफ पहले दिन से चला लेगा">Your staff can use it from day one</h2>
       <p class="lede">Most business software assumes an office. A godown is dusty, loud, and the
         person holding the phone has cloth in the other hand.</p>
     </div>
     <div class="staff-grid">
       <div class="card rise">
-        <h3>Nothing to learn</h3>
+        <h3 data-hi="सीखने को कुछ नहीं">Nothing to learn</h3>
         <p>Three buttons on the home screen: goods in, goods out, box opened. Type the quantity,
           type the name, take a photo. That is the whole job.</p>
       </div>
       <div class="card rise">
-        <h3>It forgives spelling</h3>
+        <h3 data-hi="स्पेलिंग गलत हो तो भी चलेगा">It forgives spelling</h3>
         <p>Item search matches even when the name is typed wrong. And if an item is genuinely
           new, staff send it anyway — your accountant names it while approving.</p>
       </div>
       <div class="card rise">
-        <h3>It works with no signal</h3>
+        <h3 data-hi="बिना नेटवर्क भी चलता है">It works with no signal</h3>
         <p>Bills, receipts and godown entries save on the phone and go up when the line returns.
           Nothing waits for the internet, and nothing is lost when it drops.</p>
       </div>
@@ -580,8 +701,8 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
 <section id="compare">
   <div class="wrap">
     <div class="section-head rise">
-      <div class="eyebrow">Honestly compared</div>
-      <h2>Where OnTrack is different</h2>
+      <div class="eyebrow" data-hi="ईमानदार तुलना">Honestly compared</div>
+      <h2 data-hi="OnTrack अलग कहाँ है">Where OnTrack is different</h2>
       <p class="lede">The others are good at accounting. This is built around the godown and the
         people working in it — which is where wholesale money is actually lost.</p>
     </div>
@@ -615,30 +736,30 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
 <section id="pricing">
   <div class="wrap">
     <div class="section-head rise" style="max-width:660px;margin-left:auto;margin-right:auto;text-align:center">
-      <div class="eyebrow">One price, everything included</div>
+      <div class="eyebrow" data-hi="एक कीमत, सब कुछ शामिल">One price, everything included</div>
       <h2>₹499 a month, while the introductory price lasts</h2>
-      <p class="lede">No per-user charge, no separate module for the godown app, no setup fee.</p>
+      <p class="lede" data-hi="प्रति-यूज़र चार्ज नहीं, गोदाम ऐप अलग से नहीं, सेटअप फीस नहीं।">No per-user charge, no separate module for the godown app, no setup fee.</p>
     </div>
 
     <div class="price-card rise">
-      <div class="eyebrow">Introductory price</div>
+      <div class="eyebrow" data-hi="शुरुआती कीमत">Introductory price</div>
       <div class="price-row">
         <span class="price-was num">₹1,999</span>
         <span class="price-now num">₹499</span>
-        <span class="price-per">/month</span>
+        <span class="price-per" data-hi="/महीना">/month</span>
       </div>
-      <div class="price-incl num">₹589 a month including GST · cancel any time</div>
+      <div class="price-incl num" data-hi="₹589 महीना GST सहित · कभी भी बंद करें">₹589 a month including GST · cancel any time</div>
       <div class="plist">
-        <div><span>✓</span> Billing, estimates, sale orders, delivery challans</div>
-        <div><span>✓</span> The godown app for your staff — no extra charge</div>
-        <div><span>✓</span> Photo, video and voice proof on every entry</div>
-        <div><span>✓</span> Staff, item and dealer insight</div>
-        <div><span>✓</span> Receivables ageing and reminders</div>
-        <div><span>✓</span> Works offline, syncs when the line returns</div>
-        <div><span>✓</span> Your data exports whenever you want it</div>
+        <div><svg class="ico" style="color:var(--verified);width:17px;height:17px;margin-top:2px"><use href="#i-check"/></svg> Billing, estimates, sale orders, delivery challans</div>
+        <div><svg class="ico" style="color:var(--verified);width:17px;height:17px;margin-top:2px"><use href="#i-check"/></svg> The godown app for your staff — no extra charge</div>
+        <div><svg class="ico" style="color:var(--verified);width:17px;height:17px;margin-top:2px"><use href="#i-check"/></svg> Photo, video and voice proof on every entry</div>
+        <div><svg class="ico" style="color:var(--verified);width:17px;height:17px;margin-top:2px"><use href="#i-check"/></svg> Staff, item and dealer insight</div>
+        <div><svg class="ico" style="color:var(--verified);width:17px;height:17px;margin-top:2px"><use href="#i-check"/></svg> Receivables ageing and reminders</div>
+        <div><svg class="ico" style="color:var(--verified);width:17px;height:17px;margin-top:2px"><use href="#i-check"/></svg> Works offline, syncs when the line returns</div>
+        <div><svg class="ico" style="color:var(--verified);width:17px;height:17px;margin-top:2px"><use href="#i-check"/></svg> Your data exports whenever you want it</div>
       </div>
-      <a class="btn btn-primary" href="#" style="width:100%">Start your 14 days free</a>
-      <div style="font-size:12.5px;color:var(--ink-faint);margin-top:12px">No card to start. Nothing is deleted if you stop.</div>
+      <a class="btn btn-primary" href="#" style="width:100%" data-hi="14 दिन मुफ़्त शुरू करें">Start your 14 days free</a>
+      <div style="font-size:12.5px;color:var(--ink-faint);margin-top:12px" data-hi="शुरू करने को कार्ड नहीं। बंद करने पर कुछ मिटता नहीं।">No card to start. Nothing is deleted if you stop.</div>
     </div>
 
     <div class="free-note rise">
@@ -680,7 +801,7 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
     <div class="foot-note">
       OnTrack AI ERP · Prices in Indian rupees, exclusive of GST unless stated.
       Introductory pricing is for a limited period.
-      <br />Terms of service · Privacy policy · Refund policy · Support
+      <br /><a href="terms.html" style="color:var(--ink-soft);text-decoration:underline">Terms of service</a> · <a href="privacy.html" style="color:var(--ink-soft);text-decoration:underline">Privacy policy</a> · <a href="refund.html" style="color:var(--ink-soft);text-decoration:underline">Refund policy</a> · <a href="support.html" style="color:var(--ink-soft);text-decoration:underline" data-hi="सपोर्ट">Support</a>
     </div>
   </div>
 </footer>
@@ -701,19 +822,45 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
      Entries arriving from the godown. This is the product's actual heartbeat:
      staff record, the shop approves. Stagger is deliberate — they arrive one
      at a time through the morning, not all at once. */
+
+  /* ---- language ---------------------------------------------------------
+     The people this is written for run their business in Hindi. Making them
+     read an English sales page to buy software built for Hindi-speaking staff
+     would be a contradiction. Each translation rides on its own element, so
+     there is no dictionary to drift out of step with the page. */
+  var langBtns = document.querySelectorAll("[data-lang]");
+  function setLang(l) {
+    document.documentElement.lang = l === "hi" ? "hi" : "en";
+    document.querySelectorAll("[data-hi]").forEach(function (n) {
+      if (!n.dataset.en) n.dataset.en = n.innerHTML;
+      n.innerHTML = l === "hi" ? n.dataset.hi : n.dataset.en;
+    });
+    langBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
+    try { localStorage.setItem("ontrack_lang", l); } catch (e) {}
+  }
+  langBtns.forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.dataset.lang); });
+  });
+  try {
+    var saved = localStorage.getItem("ontrack_lang");
+    /* a Hindi-speaking phone lands on Hindi without being asked */
+    if (!saved && (navigator.language || "").toLowerCase().indexOf("hi") === 0) saved = "hi";
+    if (saved === "hi") setLang("hi");
+  } catch (e) {}
+
   var ENTRIES = [
-    { tag: "in",  item: "Blackout Curtain 108×108", who: "Amar",     t: "9:12 AM",  q: "+14", icon: "📷" },
-    { tag: "in",  item: "ST DBL Feelgood",          who: "Vikas",    t: "9:40 AM",  q: "+40", icon: "🎤" },
-    { tag: "out", item: "Razai Single",             who: "Harender", t: "11:05 AM", q: "−25", icon: "📷" },
-    { tag: "in",  item: "ST DBL Amethyst XL",       who: "Amar",     t: "12:18 PM", q: "+60", icon: "📷" },
-    { tag: "out", item: "Blackout Curtain 108×108", who: "Vikas",    t: "2:44 PM",  q: "−18", icon: "🎥" }
+    { tag:"in",  item:"Cotton Bedsheet — Double", who:"Ramesh", t:"9:12 AM",  q:"+14", icon:"cam" },
+    { tag:"in",  item:"Curtain Panel 7ft",        who:"Suresh", t:"9:40 AM",  q:"+40", icon:"mic" },
+    { tag:"out", item:"Comforter — Single",       who:"Deepak", t:"11:05 AM", q:"−25", icon:"cam" },
+    { tag:"in",  item:"Bath Towel Set",           who:"Ramesh", t:"12:18 PM", q:"+60", icon:"cam" },
+    { tag:"out", item:"Cotton Bedsheet — Double", who:"Suresh", t:"2:44 PM",  q:"−18", icon:"vid" }
   ];
   var box = document.getElementById("entries");
   ENTRIES.forEach(function (e, i) {
     var row = document.createElement("div");
     row.className = "entry";
     row.innerHTML =
-      '<div class="thumb">' + e.icon + '</div>' +
+      '<div class="thumb"><svg class="ico"><use href="#i-' + e.icon + '"/></svg></div>' +
       '<div><div class="e-item"><span class="tag tag-' + e.tag + '">' + (e.tag === "in" ? "IN" : "OUT") + '</span>' + e.item + '</div>' +
       '<div class="e-meta">' + e.who + ' · ' + e.t + '</div></div>' +
       '<div class="e-qty num" style="color:' + (e.tag === "in" ? "var(--indigo)" : "var(--verified)") + '">' + e.q + '</div>';
@@ -733,11 +880,16 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
     el.querySelectorAll("[data-w]").forEach(function (b) {
       b.style.width = b.getAttribute("data-w") + "%";
     });
+    /* the ring fills one segment at a time, so the ninety-day slice arrives
+       last and is still moving when the eye reaches it */
+    el.querySelectorAll("circle.seg").forEach(function (c, i) {
+      setTimeout(function () { c.setAttribute("stroke-dasharray", c.getAttribute("data-seg")); }, i * 130);
+    });
   }
 
   if (!("IntersectionObserver" in window) || reduce) {
     document.querySelectorAll(".rise").forEach(function (n) { n.classList.add("seen"); });
-    document.querySelectorAll("[data-chart],[data-rank],[data-aging]").forEach(draw);
+    document.querySelectorAll("[data-chart],[data-rank],[data-aging],[data-dash]").forEach(draw);
     return;
   }
 
@@ -745,9 +897,11 @@ footer{border-top:1px solid var(--rule);padding:48px 0 60px;margin-top:20px}
     rows.forEach(function (r) {
       if (!r.isIntersecting) return;
       r.target.classList.add("seen");
-      r.target.querySelectorAll("[data-chart],[data-rank],[data-aging]").forEach(function (c) {
-        setTimeout(function () { draw(c); }, 160);
-      });
+      var sel = "[data-chart],[data-rank],[data-aging],[data-dash]";
+      // the element itself counts, not only its descendants
+      var targets = Array.prototype.slice.call(r.target.querySelectorAll(sel));
+      if (r.target.matches && r.target.matches(sel)) targets.push(r.target);
+      targets.forEach(function (c) { setTimeout(function () { draw(c); }, 160); });
       io.unobserve(r.target);
     });
   }, { threshold: 0.16, rootMargin: "0px 0px -60px 0px" });
