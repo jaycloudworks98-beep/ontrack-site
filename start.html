@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Start your 14 days free — OnTrack AI ERP</title>
+<meta name="description" content="Create your OnTrack account and start a 14-day free trial. No card to start." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F6F2; --sheet:#FFFFFF; --ink:#131A26; --ink-soft:#5C6577; --ink-faint:#8B93A3;
+    --indigo:#2B44D9; --indigo-deep:#1E33AE; --indigo-wash:#EDF0FE; --verified:#128A5E;
+    --bad:#D2402A; --rule:#E4E2DC; --r:14px;
+    --display:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;
+    --body:"Public Sans",system-ui,sans-serif;
+    --shadow:0 1px 2px rgba(19,26,38,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+  a{color:var(--indigo);text-decoration:none}
+  h1,h2{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.06;margin:0}
+  .wrap{max-width:520px;margin:0 auto;padding:22px 20px 60px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.02em;color:var(--ink)}
+  .brand .dot{width:26px;height:26px;border-radius:8px;background:var(--indigo);display:grid;place-items:center;color:#fff;font-size:15px}
+  .card{background:var(--sheet);border:1px solid var(--rule);border-radius:20px;padding:26px 22px;margin-top:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-size:12.5px;font-weight:800;color:var(--indigo);text-transform:uppercase;letter-spacing:.06em}
+  label{display:block;font-size:13.5px;font-weight:700;color:var(--ink);margin:14px 0 6px}
+  .hint{font-size:12px;color:var(--ink-faint);font-weight:600;margin-top:4px}
+  input{width:100%;font-family:var(--body);font-size:16px;font-weight:600;color:var(--ink);background:var(--paper);
+    border:1.5px solid var(--rule);border-radius:12px;padding:14px 14px}
+  input:focus{outline:none;border-color:var(--indigo)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;font-family:var(--body);
+    font-weight:800;font-size:16px;padding:16px 26px;border-radius:var(--r);border:1px solid transparent;cursor:pointer;
+    transition:transform .14s cubic-bezier(.23,1,.32,1)}
+  .btn:active{transform:translateY(2px)}
+  .btn-primary{background:var(--indigo);color:#fff;box-shadow:0 2px 0 var(--indigo-deep),var(--shadow)}
+  .btn[disabled]{opacity:.55;cursor:default}
+  .err{background:#FBEAE6;color:var(--bad);border-radius:12px;padding:12px 14px;font-size:13.5px;font-weight:700;margin-top:14px;display:none}
+  .foot{text-align:center;font-size:12.5px;color:var(--ink-faint);margin-top:26px;line-height:1.7}
+  .foot a{color:var(--ink-soft);text-decoration:underline}
+  .ok-wrap{display:none;text-align:center}
+  .ok-tick{width:64px;height:64px;border-radius:50%;background:#E6F5EE;color:var(--verified);display:grid;place-items:center;font-size:34px;margin:0 auto 14px}
+  .step{display:flex;gap:12px;text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:13px 14px;margin-top:10px}
+  .step .n{width:24px;height:24px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;flex-shrink:0}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="brand" href="/"><span class="dot">O</span> OnTrack</a>
+
+    <!-- SIGN-UP FORM -->
+    <div class="card" id="formCard">
+      <div class="eyebrow">14 days free · no card</div>
+      <h1 style="font-size:27px;margin-top:8px">Apna account banao</h1>
+      <p style="color:var(--ink-soft);font-size:14.5px;margin:8px 0 2px">Business ki details bharo — trial abhi shuru ho jaayega. Card ki zaroorat nahi.</p>
+
+      <label for="company">Business ka naam</label>
+      <input id="company" autocomplete="organization" placeholder="e.g. Sharma Textiles" />
+
+      <label for="full_name">Aapka naam</label>
+      <input id="full_name" autocomplete="name" placeholder="e.g. Rahul Sharma" />
+
+      <label for="email">Email <span style="color:var(--ink-faint);font-weight:600">(optional)</span></label>
+      <input id="email" type="email" autocomplete="email" placeholder="you@business.com" />
+
+      <label for="username">Username</label>
+      <input id="username" autocomplete="username" autocapitalize="none" placeholder="kam se kam 4 akshar" />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="new-password" placeholder="kam se kam 8 akshar" />
+
+      <label for="admin_pin">Admin PIN</label>
+      <input id="admin_pin" inputmode="numeric" autocomplete="off" placeholder="4 se 8 digit — app kholne ke liye" />
+      <div class="hint">Ye PIN app me admin access ke liye hai. Yaad rakhna.</div>
+
+      <div class="err" id="err"></div>
+      <button class="btn btn-primary" id="submit" style="margin-top:20px">Trial shuru karo →</button>
+
+      <div class="foot">
+        Pehle se account hai? App kholo aur login karo.<br>
+        <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="refund.html">Refund</a> · <a href="support.html">Support</a>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="card ok-wrap" id="okCard">
+      <div class="ok-tick">✓</div>
+      <h2 style="font-size:24px">Account ban gaya!</h2>
+      <p style="color:var(--ink-soft);font-size:14.5px;margin:8px 0 4px">14-din ka free trial shuru. Ab bas do kaam:</p>
+      <div class="step"><span class="n">1</span><div><b>OnTrack app download karo</b><div class="hint" id="dlHint" style="margin-top:3px">Neeche button se.</div></div></div>
+      <div class="step"><span class="n">2</span><div><b>Inhi username &amp; password se login karo</b><div class="hint" style="margin-top:3px">Phir "App set up karo" checklist follow karo.</div></div></div>
+      <a class="btn btn-primary" id="dlBtn" href="#" style="margin-top:18px">App download karo</a>
+      <div class="foot"><a href="/">Home pe wapas</a></div>
+    </div>
+  </div>
+
+<script>
+  // ── SET THESE two before launch ─────────────────────────────────────────────
+  // Where the app is downloaded from. Play Store URL once live, or a public APK
+  // link (e.g. a GitHub Release) in the meantime. Leave "" to hide the button and
+  // show a "contact us" line instead.
+  const DOWNLOAD_URL = "";
+  const API_BASE = "https://ontrackbilling-backend-production.up.railway.app";
+  // ────────────────────────────────────────────────────────────────────────────
+
+  const $ = (id) => document.getElementById(id);
+  const errBox = $("err");
+  const showErr = (m) => { errBox.textContent = m; errBox.style.display = "block"; };
+
+  $("submit").addEventListener("click", async () => {
+    errBox.style.display = "none";
+    const body = {
+      company: $("company").value.trim(),
+      full_name: $("full_name").value.trim(),
+      email: $("email").value.trim(),
+      username: $("username").value.trim().toLowerCase(),
+      password: $("password").value,
+      admin_pin: $("admin_pin").value.trim(),
+    };
+    if (!body.company) return showErr("Business ka naam daalo.");
+    if (!body.full_name) return showErr("Apna naam daalo.");
+    if (body.username.length < 4) return showErr("Username kam se kam 4 akshar ka ho.");
+    if (body.password.length < 8) return showErr("Password kam se kam 8 akshar ka ho.");
+    if (!/^\d{4,8}$/.test(body.admin_pin)) return showErr("Admin PIN 4 se 8 digit ka ho.");
+
+    const btn = $("submit");
+    btn.disabled = true; btn.textContent = "Ban raha hai…";
+    try {
+      const res = await fetch(API_BASE + "/api/account/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) { showErr(data.error || "Account nahi ban paya. Dobara koshish karo."); btn.disabled = false; btn.textContent = "Trial shuru karo →"; return; }
+      // success
+      $("formCard").style.display = "none";
+      const dl = $("dlBtn");
+      if (DOWNLOAD_URL) { dl.href = DOWNLOAD_URL; }
+      else { dl.style.display = "none"; $("dlHint").textContent = "Download link jald — abhi humse support pe contact karo."; }
+      $("okCard").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (e) {
+      showErr("Network error — internet check karke dobara try karo.");
+      btn.disabled = false; btn.textContent = "Trial shuru karo →";
+    }
+  });
+
+  // Enter key submits from the last field
+  $("admin_pin").addEventListener("keydown", (e) => { if (e.key === "Enter") $("submit").click(); });
+</script>
+</body>
+</html>
