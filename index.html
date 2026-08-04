@@ -949,7 +949,7 @@ footer{border-top:1px solid var(--rule);padding:52px 0 64px;margin-top:20px}
           <button role="tab" aria-selected="false" onclick="switchDash(this,'year')">Year</button>
         </div>
       </div>
-      <div class="kpis">
+      <div class="kpis" id="dashKpis">
         <div class="kpi"><div class="eyebrow">Billed today</div><div class="kpi-v">Rs <span class="slot-num" data-target="384200">0</span></div><div class="kpi-d up">▲ 12% vs last Tuesday</div></div>
         <div class="kpi"><div class="eyebrow">Outstanding</div><div class="kpi-v">Rs <span class="slot-num" data-target="2260000">0</span></div><div class="kpi-d down">▲ Rs 1.4L past 90 days</div></div>
         <div class="kpi"><div class="eyebrow">Waiting for you</div><div class="kpi-v"><span class="slot-num" data-target="7">0</span></div><div class="kpi-d down">2 waiting over a day</div></div>
@@ -957,17 +957,17 @@ footer{border-top:1px solid var(--rule);padding:52px 0 64px;margin-top:20px}
       </div>
       <div class="dash-body">
         <div>
-          <div class="eyebrow" style="margin-bottom:14px">Billing — last 30 days</div>
+          <div class="eyebrow" style="margin-bottom:14px" id="sparkCaption">Billing — last 30 days</div>
           <div class="spark-wrap" id="sparkWrap">
             <svg class="spark" viewBox="0 0 420 150" preserveAspectRatio="none" role="img" aria-label="Billing trend">
               <defs><linearGradient id="sparkfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2B44D9" stop-opacity=".16"/><stop offset="1" stop-color="#2B44D9" stop-opacity="0"/></linearGradient></defs>
               <line class="gridline" x1="0" y1="38" x2="420" y2="38"/><line class="gridline" x1="0" y1="76" x2="420" y2="76"/><line class="gridline" x1="0" y1="114" x2="420" y2="114"/>
-              <path class="fill" d="M0,112 L34,96 L68,104 L102,72 L136,80 L170,52 L204,64 L238,36 L272,48 L306,26 L340,40 L374,20 L420,30 L420,150 L0,150 Z"/>
-              <path class="line" d="M0,112 L34,96 L68,104 L102,72 L136,80 L170,52 L204,64 L238,36 L272,48 L306,26 L340,40 L374,20 L420,30"/>
+              <path class="fill" id="sparkFill" d="M0,112 L34,96 L68,104 L102,72 L136,80 L170,52 L204,64 L238,36 L272,48 L306,26 L340,40 L374,20 L420,30 L420,150 L0,150 Z"/>
+              <path class="line" id="sparkLine" d="M0,112 L34,96 L68,104 L102,72 L136,80 L170,52 L204,64 L238,36 L272,48 L306,26 L340,40 L374,20 L420,30"/>
             </svg>
             <div class="crosshair" id="crosshair" style="left:0" data-val="Rs 3.8L"></div>
           </div>
-          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink-faint);margin-top:8px;font-weight:700">
+          <div id="sparkAxis" style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink-faint);margin-top:8px;font-weight:700">
             <span>Jul 5</span><span>Jul 15</span><span>Jul 25</span><span>Aug 3</span>
           </div>
         </div>
@@ -1583,10 +1583,79 @@ setInterval(function(){
 }, 3000);
 
 /* ===== DASH TABS ===== */
+var DASH_DATA = {
+  today: {
+    kpis: [
+      {label:"Billed today", prefix:"Rs ", target:384200, delta:"\u25b2 12% vs last Tuesday", dir:"up"},
+      {label:"Outstanding", prefix:"Rs ", target:2260000, delta:"\u25b2 Rs 1.4L past 90 days", dir:"down"},
+      {label:"Waiting for you", prefix:"", target:7, delta:"2 waiting over a day", dir:"down"},
+      {label:"Orders due", prefix:"", target:14, delta:"3 ready to dispatch", dir:"up"}
+    ],
+    caption:"Billing \u2014 last 30 days",
+    axis:["Jul 5","Jul 15","Jul 25","Aug 3"],
+    line:"M0,112 L34,96 L68,104 L102,72 L136,80 L170,52 L204,64 L238,36 L272,48 L306,26 L340,40 L374,20 L420,30",
+    vals:[2.1,2.4,2.3,3.1,2.9,3.8,3.5,4.2,3.9,4.8,4.4,5.2,5.0,5.5]
+  },
+  month: {
+    kpis: [
+      {label:"Billed this month", prefix:"Rs ", target:6840000, delta:"\u25b2 18% vs last month", dir:"up"},
+      {label:"Outstanding", prefix:"Rs ", target:2260000, delta:"\u25b2 Rs 1.4L past 90 days", dir:"down"},
+      {label:"Approvals cleared", prefix:"", target:142, delta:"96% cleared same day", dir:"up"},
+      {label:"Orders delivered", prefix:"", target:386, delta:"11 still pending", dir:"down"}
+    ],
+    caption:"Billing \u2014 last 12 months",
+    axis:["Sep","Dec","Mar","Aug"],
+    line:"M0,124 L34,118 L68,104 L102,110 L136,88 L170,94 L204,70 L238,78 L272,54 L306,60 L340,38 L374,44 L420,22",
+    vals:[38,41,46,44,52,49,58,55,64,61,72,69,78,84]
+  },
+  year: {
+    kpis: [
+      {label:"Billed this year", prefix:"Rs ", target:74500000, delta:"\u25b2 31% vs last year", dir:"up"},
+      {label:"Outstanding", prefix:"Rs ", target:2260000, delta:"\u25b2 Rs 1.4L past 90 days", dir:"down"},
+      {label:"Approvals cleared", prefix:"", target:1847, delta:"Avg 4 min to approve", dir:"up"},
+      {label:"Orders delivered", prefix:"", target:4290, delta:"98.2% delivered on time", dir:"up"}
+    ],
+    caption:"Billing \u2014 last 5 years",
+    axis:["2022","2023","2024","2026"],
+    line:"M0,132 L34,128 L68,116 L102,112 L136,98 L170,92 L204,80 L238,72 L272,58 L306,50 L340,38 L374,28 L420,16",
+    vals:[3.1,3.4,3.9,4.2,4.8,5.1,5.6,6.0,6.5,6.9,7.1,7.3,7.4,7.45]
+  }
+};
+
 window.switchDash = function(btn, period){
   var parent = btn.parentElement;
   parent.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-selected","false");});
   btn.setAttribute("aria-selected","true");
+
+  var d = DASH_DATA[period];
+  if(!d) return;
+
+  // KPI cards: label, value (re-animated) and the delta line under it
+  var cards = document.querySelectorAll("#dashKpis .kpi");
+  d.kpis.forEach(function(k, i){
+    var c = cards[i];
+    if(!c) return;
+    var lab = c.querySelector(".eyebrow");
+    var val = c.querySelector(".kpi-v");
+    var del = c.querySelector(".kpi-d");
+    if(lab) lab.textContent = k.label;
+    if(val) val.innerHTML = k.prefix + '<span class="slot-num" data-target="' + k.target + '">0</span>';
+    if(del){ del.textContent = k.delta; del.className = "kpi-d " + k.dir; }
+  });
+  animateSlots();
+
+  // trend chart + its axis
+  var cap = document.getElementById("sparkCaption");
+  if(cap) cap.textContent = d.caption;
+  var ln = document.getElementById("sparkLine");
+  var fl = document.getElementById("sparkFill");
+  if(ln) ln.setAttribute("d", d.line);
+  if(fl) fl.setAttribute("d", d.line + " L420,150 L0,150 Z");
+  var ax = document.getElementById("sparkAxis");
+  if(ax) ax.innerHTML = d.axis.map(function(t){ return "<span>" + t + "</span>"; }).join("");
+
+  // keep the hover crosshair in sync with the period being shown
+  sparkVals = d.vals;
 };
 
 /* ===== LANGUAGE TOGGLE ===== */
