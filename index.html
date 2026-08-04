@@ -461,6 +461,17 @@ footer{border-top:1px solid var(--rule);padding:52px 0 64px;margin-top:20px}
   flex-direction:column;
   align-items:center;
 }
+.demo-video{
+  width:100%;
+  max-width:330px;
+  aspect-ratio:9/16;
+  object-fit:cover;
+  display:block;
+  border-radius:24px;
+  background:#0f1117;
+  box-shadow:0 26px 70px rgba(0,0,0,.5);
+}
+@media(max-width:860px){ .demo-video{max-width:290px} }
 
 .demo-features{
   display:flex;
@@ -1164,20 +1175,13 @@ footer{border-top:1px solid var(--rule);padding:52px 0 64px;margin-top:20px}
     </div>
     <div class="demo-sequence rise">
       <div class="demo-layout">
-        <!-- VIDEO PHONE -->
+        <!-- LOOPING DEMO VIDEO -->
         <div class="demo-video-wrap">
-          <div class="demo-phone">
-            <div class="phone-frame" style="border-radius:36px"></div>
-            <div class="phone-notch"></div>
-            <div class="demo-screen" style="inset:10px;border-radius:30px;overflow:hidden;background:#000;">
-              <video autoplay muted loop playsinline preload="auto" 
-                style="width:100%;height:100%;object-fit:cover;border-radius:30px;display:block;background:#1e1e2e;" 
-                id="demoVideo">
-                <source src="demo.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="phone-glare" style="border-radius:36px"></div>
-          </div>
+          <video class="demo-video" id="demoVideo"
+                 autoplay muted loop playsinline webkit-playsinline
+                 preload="auto" poster="poster.jpg" disablepictureinpicture>
+            <source src="demo.mp4" type="video/mp4">
+          </video>
           <div style="text-align:center;margin-top:14px;color:#9BA5B8;font-size:13px;font-weight:600;">
             <span style="display:inline-flex;align-items:center;gap:6px;">
               <span style="width:8px;height:8px;border-radius:50%;background:#128A5E;animation:pulseGreen 2s ease-in-out infinite;"></span>
@@ -1581,6 +1585,25 @@ setInterval(function(){
   demoImgs[demoIdx].classList.add("demo-active");
   if(demoCaption) demoCaption.innerHTML = demoTexts[demoIdx];
 }, 3000);
+
+/* ===== DEMO VIDEO: make sure it actually starts ===== */
+var demoVid = document.getElementById("demoVideo");
+if(demoVid){
+  demoVid.muted = true;              // required for autoplay on mobile
+  var tryPlay = function(){
+    var p = demoVid.play();
+    if(p && p.catch) p.catch(function(){});
+  };
+  tryPlay();
+  demoVid.addEventListener("loadeddata", tryPlay);
+  demoVid.addEventListener("canplay", tryPlay);
+  ["touchstart","click","scroll"].forEach(function(ev){
+    addEventListener(ev, function once(){
+      tryPlay();
+      removeEventListener(ev, once);
+    }, {passive:true});
+  });
+}
 
 /* ===== DASH TABS ===== */
 var DASH_DATA = {
